@@ -14,7 +14,7 @@ body{
     height: 100vh;
 }
 .page > aside{
-    width: 200px;
+    width: 300px;
 }
 .page > main {
     flex-grow: 1;
@@ -34,6 +34,9 @@ body{
 .songlist{
  text-align: left;
     border-top: 1px solid #999;
+
+}
+.songlist-container{
     flex-grow: 1;
 }
 .songlist > li{
@@ -55,7 +58,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 200px;
+    width: 100%;
     flex-direction: column;
 
 }

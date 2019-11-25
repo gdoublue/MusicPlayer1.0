@@ -10,20 +10,15 @@
     <aside class="siderbar">
         <div class="newSong active">
         </div>
-        <ul class="songlist">
-            <li> 歌曲 1</li>
-            <li class="active"> 歌曲 2</li>
-            <li> 歌曲 3</li>
-            <li> 歌曲 4</li>
-            <li> 歌曲 5</li>
-            <li> 歌曲 6</li>
-            <li> 歌曲 7</li>
-        </ul>
+        <div class="songlist-container">
+
+        </div>
+
         <div class="uploadArea">
             <div id="draggable" class="draggable">
                 <div id="clickable" class="clickable">
                 <span>选择/拖到此框上传文件</span>
-                <p>文件最大40M</p>
+                <p>文件最大20M</p>
                 </div>
             </div>
         </div>
@@ -33,9 +28,16 @@
 
     </main>
 </div>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script src="./vendors/moxie.js"></script>
+<script src="./node_modules/plupload/js/plupload.min.js"></script>
+<script src="./node_modules/qiniu-js/dist/qiniu.min.js"></script>
+
+<script src="js/event-hub.js"></script>
 <script src="js/song-From.js"></script>
 <script src="js/new-song.js"></script>
+<script src="js/song-list.js"></script>
+<script src="js/upload-song.js"></script>
 
 </body>
 </html>
