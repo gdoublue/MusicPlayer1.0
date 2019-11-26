@@ -58,8 +58,8 @@
             });
            return  Song.save().then((newSong) =>{
                 let {id, attributes} = newSong
-                Object.assign(this.data,{id,...attributes})
-               alert('保存成功')
+                Object.assign(this.data,{id,...attributes})    //将保存到网上的数据也拷一份到this.data
+               // alert('保存成功')
             }, (error)=>{console.error(error)})
         }
 
@@ -85,13 +85,14 @@
                 needs.map((string)=>{
                     data[string] = $(this.view.el).find(`[name="${string}"]`).val()
                 })
-                this.model.create(data)
+                this.model.create(data)  //执行保存到leancloud
                     .then(()=>{
                         this.view.reset()
                         let string = JSON.stringify(this.model.data)
-                        let object = json_parse(string)
-                        console.log('发布到歌单'+object)
-                    })
+                        console.log('发布到歌单')
+                        let object = JSON.parse(string)
+                        window.eventHub.emit('create',object)
+                    });
             })
         }
     }

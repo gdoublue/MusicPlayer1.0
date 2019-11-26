@@ -3,25 +3,51 @@
         el:'.songlist-container',
         template:`
              <ul class="songlist">
-            <li> 歌曲 1</li>
-            <li class="active"> 歌曲 2</li>
-            <li> 歌曲 3</li>
-            <li> 歌曲 4</li>
-            <li> 歌曲 5</li>
-            <li> 歌曲 6</li>
-            <li> 歌曲 7</li>
+          
         </ul>
         `,
         render(data){
-            $(this.el).html(this.template)
+            let $el = $(this.el)
+            $el.html(this.template)
+            let{songs} = data
+            let list = songs.map((song)=>
+            $('<li></li>').text(song.song))
+            $el.find('ul').empty()
+            list.map((domLi)=>{
+                $el.find('ul').append(domLi)
+            })
+        },
+        clearActive(){
+            $(this.el).find('.active').removeClass('active')
         }
     }
-    let model={}
+    let model={
+        data:{
+            songs:[ ]
+        },
+        find(){
+            var querySongs = new AV.Query('Song')
+            return querySongs.find().then((allSongs)=>{
+             this.data.songs = allSongs.map((song)=>{
+                return  {id:song.id , ...song.attributes}
+             })
+                return this.data.songs
+            })
+        }
+    }
     let controller={
         init(view,model){
             this.view=view
             this.model=model
             this.view.render(this.model.data)
+            window.eventHub.on('create',(songData)=> {
+
+                this.model.data.songs.push(songData)        //push ,所以数据会叠加
+                this.view.render(this.model.data)
+            })
+            this.model.find().then(()=>{
+                this.view.render(this.model.data)
+            })
         }
     }
    controller.init(view,model)
