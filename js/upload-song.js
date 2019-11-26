@@ -32,29 +32,21 @@
                         });
                     },
                     'BeforeUpload': (up, file) =>{
-                        // window.eventHub.emit('beforeUpload')
-                        // if(this.model.data.status === 'closed'){
-                        //     return false
-                        // }else{
-                        //     this.model.data.status = 'closed'
-                        //     return true
-                        // }
-                        // 每个文件上传前,处理相关的事情
+
                     },
                     'UploadProgress': function(up, file) {
                         // 每个文件上传时,处理相关的事情
                     },
                     // 文件上传成功之后调用 FileUploaded
                     'FileUploaded': (up, file, info) => {
-                        // window.eventHub.emit('afterUpload')
-                        // this.model.data.status = 'open'
+
                         var domain = up.getOption('domain');
                         var response = JSON.parse(info.response);
                         var sourceLink = 'http://' + domain + '/' + encodeURIComponent(response.key);
-                        // window.eventHub.emit('new', {
-                        //     url: sourceLink,
-                        //     name: response.key
-                        // })
+                        window.eventHub.emit('upload', {
+                            url: sourceLink,
+                            name: response.key
+                        })
                         console.log({
                             link:sourceLink,
                             key:response.key
