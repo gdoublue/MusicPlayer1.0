@@ -5,12 +5,12 @@
             this.$el=$(this.el)
         },
         template:`
-            <h1>新建歌曲</h1>
+        
         <form class="form">
             <div class="row">
                 <label>
                     歌名</label>
-                    <input type="text" name="name" value="__name__">
+                    <input type="text" name="name" value="__song__">
 
             </div>
             <div class="row">
@@ -33,12 +33,18 @@
         </form>
         `,
         render(data={}) {
-            let placeholder = ['name', 'url', 'singer','id']
+            let placeholder = ['song', 'url', 'singer','id']
             let html = this.template
             placeholder.map((string) => {
                 html = html.replace(`__${string}__`, data[string] || '')
             })
             $(this.el).html(html)
+            if(data.id){
+                $(this.el).prepend('<h1>编辑歌曲</h1>')
+            }else{
+                $(this.el).prepend('<h1>新建歌曲</h1>')
+            }
+
         },
         reset() {
             this.render({})
@@ -47,7 +53,7 @@
     }
 
     let model={
-        data:{name:'',singer:'',url:'',id:''},
+        data:{song:'',singer:'',url:'',id:''},
         create(data){
             var song = AV.Object.extend('Song');
             let Song = new song();
@@ -61,6 +67,19 @@
                 Object.assign(this.data,{id,...attributes})    //将保存到网上的数据也拷一份到this.data
                // alert('保存成功')
             }, (error)=>{console.error(error)})
+        },
+        update(data){
+            var song=AV.Object.createWithoutData('Song',this.data.id)
+           song.set({
+                song:data.name,
+                singer:data.singer,
+                url:data.url,
+            });
+            return song.save().then((response)=>{
+                let {id, attributes} = response
+                Object.assign(this.data,{id,...attributes})
+                return response
+            },(error)=>{console.error(error)})
         }
 
     }
@@ -71,10 +90,22 @@
             this.model=model
             this.view.render(this.model.data)
             this.bindEvents()
-            //订阅上传完成事件
-            window.eventHub.on('upload',(data)=>{
+            this.bindeEventHub()
+        },
+        bindeEventHub(){
+            //订阅事件
+            window.eventHub.on('select',(data)=>{
+                // console.log('data')         //选中进入编辑
                 this.model.data = data
                 this.view.render(this.model.data)
+            })
+            window.eventHub.on('new',(data)=>{   //新建清空表单
+                if(this.model.data.id){
+                    this.model.data={ }
+                }else{
+                    Object.assign(this.model.data,data)
+                }
+               this.view.render(this.model.data)
             })
         },
         bindEvents(){
@@ -85,15 +116,29 @@
                 needs.map((string)=>{
                     data[string] = $(this.view.el).find(`[name="${string}"]`).val()
                 })
-                this.model.create(data)  //执行保存到leancloud
-                    .then(()=>{
-                        this.view.reset()
-                        let string = JSON.stringify(this.model.data)
-                        console.log('发布到歌单')
-                        let object = JSON.parse(string)
-                        window.eventHub.emit('create',object)
-                    });
+               if(this.model.data.id){
+                   this.update(data)
+               }else{
+                   this.create(data)
+               }
             })
+        },
+        create(data){
+            this.model.create(data)  //执行保存到leancloud
+                .then(()=>{
+                    let string = JSON.stringify(this.model.data)
+                    console.log('发布到歌单')
+                    let object = JSON.parse(string)
+                    window.eventHub.emit('create',object)
+                    this.view.reset()
+                });
+        },
+        update(data){
+              this.model.update(data)
+                  .then(()=>{
+                      console.log('更新成功')
+                      window.eventHub.emit('update',JSON.parse(JSON.stringify(this.model.data)))
+                  })
         }
     }
     controller.init(view,model)

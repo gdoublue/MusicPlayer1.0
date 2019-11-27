@@ -63,21 +63,31 @@
                         break
                     }
                 }
-                console.log(JSON.parse(JSON.stringify(data)))
-                window.eventHub.emit('select', JSON.parse(JSON.stringify(data)))
+                // console.log(JSON.parse(JSON.stringify(data)))
+                window.eventHub.emit('select', JSON.parse(JSON.stringify(data)))  //深拷贝
             })
         },
         bindeEventHub(){
-            window.eventHub.on('upload',()=>{
-                this.view.clearActive()
-            })
+
             window.eventHub.on('create',(songData)=> {
 
                 this.model.data.songs.push(songData)        //push ,所以数据会叠加
                 this.view.render(this.model.data)
             })
-            window.eventHub.on('new',()=>{
+            window.eventHub.on('new',( )=>{
+
                 this.view.clearActive()
+            })
+            window.eventHub.on('update',(song)=>{
+                let songs=this.model.data.songs
+                for(let i=0;i<songs.length;i++){
+                    if(songs[i].id===song.id){
+                        Object.assign(songs[i]=song)
+                    }
+                }
+                this.view.render(this.model.data)
+                // console.log('更新列表')
+                // console.log(this.model.data)
             })
 
         }

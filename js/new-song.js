@@ -9,10 +9,12 @@
         },
         active(){
             $(this.el).addClass('active')
+            $('.uploadArea').addClass('active')
             window.eventHub.emit('new')
         },
         deactive(){
             $(this.el).removeClass('active')
+            $('.uploadArea').removeClass('active')
         }
     }
     let model={}
@@ -23,16 +25,18 @@
             this.view.render(this.model.data)
             this.view.active()
             this.bindeEventHub()
+            $(this.view.el).on('click',()=>{
+                this.view.active()
+            })
         },
         bindeEventHub(){
             window.eventHub.on('upload',(data)=>{
-                this.active()
+                this.view.active()
 
 
             })
             window.eventHub.on('select',(data)=>{
                 this.view.deactive()
-                console.log('dededeacactitititiveveve')
             })
         },
 
