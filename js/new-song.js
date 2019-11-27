@@ -23,18 +23,14 @@
             this.view=view
             this.model=model
             this.view.render(this.model.data)
-            this.view.active()
+            // this.view.active()
             this.bindeEventHub()
             $(this.view.el).on('click',()=>{
                 this.view.active()
             })
         },
         bindeEventHub(){
-            window.eventHub.on('upload',(data)=>{
-                this.view.active()
 
-
-            })
             window.eventHub.on('select',(data)=>{
                 this.view.deactive()
             })

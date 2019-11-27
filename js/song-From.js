@@ -1,6 +1,6 @@
 {
     let view = {
-        el:'.page > main',
+        el:'.workArea > main',
         init(){
             this.$el=$(this.el)
         },
@@ -31,6 +31,7 @@
             </div>
 
         </form>
+        
         `,
         render(data={}) {
             let placeholder = ['song', 'url', 'singer','id']
@@ -131,6 +132,7 @@
                     let object = JSON.parse(string)
                     window.eventHub.emit('create',object)
                     this.view.reset()
+                    this.model.data={ }
                 });
         },
         update(data){
