@@ -2,34 +2,31 @@
     let view= {
         el:'#app',
         template:`
-       <audio src={{url}}> </audio>
-       <div>
-       <h3>正在播放 {{song}}
-       </h3>
-       <button class="play">play</button>
-       <button class="pause">PAUSE</button>
        
-       
-       </div>
         `,
         render(data){
-            console.log(data)
-            console.log(data.song)
-            $(this.el).html(this.template.replace('{{url}}',data.url).replace('{{song}}',data.song))
+            document.title=data.song
+           $('.song-description> h1').html(data.song)
+            $(this.el).find('audio').attr('src',data.url)
+
+
         },
         play(){
             let audio=$(this.el).find('audio')[0]
             audio.play()
+            $(this.el).find('.disc-container').addClass('playing')
         },
         pause(){
             let audio=$(this.el).find('audio')[0]
             audio.pause()
+            $(this.el).find('.disc-container').removeClass('playing')
         },
     }
     let model={
         data:{
 
         },
+        status:true,
 
         get(id){
             var songQuery= new AV.Query('Song')
@@ -48,18 +45,23 @@
                 console.log(this.model.data)
                 this.view.render(this.model.data)
             })
-
-
-
+            console.log('1')
+            setTimeout(()=>{this.view.play()},1300)
             this.bindEvents()
+
         },
         bindEvents(){
-          $(this.view.el).on('click','.play',()=>{
-              this.view.play()
+          $('.disc').on('click',()=>{
+             this.model.status =! this.model.status
+              if (this.model.status){
+                    this.view.pause()
+                  console.log(this.model.status)
+              }else{
+                this.view.play()
+                  console.log(this.model.status)
+              }
           })
-          $(this.view.el).on('click','.pause',()=>{
-                this.view.pause()
-            })
+
         },
         getSongId(){
             let search=window.location.search
