@@ -52,10 +52,13 @@ section.topbar .logo>svg{
 
 }
 section.topbar > a{
-    color: white;
+    color: #D43C33;
+    background-color: white;
     display: inline-block;
     padding: 5px 11px;
     line-height: 20px;
+    border-radius: 37.5%/100%;
+
     position: relative;
 }
 section.topbar > a::after{
@@ -66,9 +69,9 @@ section.topbar > a::after{
     width: 200%;
     height: 200%;
     border: 1px solid white;
-    border-radius: 50px;
     transform: scale(0.5);
     transform-origin: 0 0;
+    border-radius: 37.5%/100%;
 }
 
 /* tabs-nav */

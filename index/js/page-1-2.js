@@ -2,6 +2,7 @@
     let view= {
         el:'section.songs',
         template:`
+          <a href="./player.html?id={{song.id}}">
           <li>
           <h3>{{song.song}}</h3>
           <p>
@@ -10,12 +11,13 @@
             </svg>
             {{song.singer}}
           </p>
-          <a class="playButton" href="#">
+          <a class="playButton" href="./player.html?id={{song.id}}">
             <svg class="icon icon-play">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-play"></use>
             </svg>
           </a>
         </li>
+        </a>
         `,
         init(){
             this.$el=$(this.el)
@@ -25,7 +27,10 @@
             songs.map((song)=>{
                 let $li = $(this.template
                     .replace('{{song.song}}',song.song)
-                    .replace('{{song.singer}}',song.singer))
+                    .replace('{{song.singer}}',song.singer)
+                    .replace('{{song.id}}',song.id)
+
+                )
                 this.$el.find('ol.list').append($li)
             })
         }

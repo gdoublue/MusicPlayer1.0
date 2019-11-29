@@ -45,7 +45,6 @@
             }else{
                 $(this.el).prepend('<h1>新建歌曲</h1>')
             }
-
         },
         reset() {
             this.render({})
