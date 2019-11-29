@@ -7,7 +7,9 @@
            }
         }
 
-    let model={}
+    let model={
+        status:'open',
+    }
     let controller ={
       init(view, model){
           this.view = view
@@ -32,14 +34,21 @@
                         });
                     },
                     'BeforeUpload': (up, file) =>{
-
+                     window.eventHub.emit('beforeUpload')
+                      if(this.model.status==='closed'){
+                          return false
+                      }else{
+                          this.model.status='closed'
+                          return  true
+                      }
                     },
                     'UploadProgress': function(up, file) {
                         // 每个文件上传时,处理相关的事情
                     },
                     // 文件上传成功之后调用 FileUploaded
                     'FileUploaded': (up, file, info) => {
-
+                        this.model.status='open'
+                        window.eventHub.emit('afterUpload')
                         var domain = up.getOption('domain');
                         var response = JSON.parse(info.response);
                         var sourceLink = 'http://' + domain + '/' + encodeURIComponent(response.key);

@@ -33,7 +33,7 @@ body{
    font-weight: bolder;
 }
 .siderbar >.newSong.active{
-    background: #999999;
+    background: #cccccc;
 }
 .songlist{
  text-align: left;
@@ -46,6 +46,8 @@ body{
 .songlist{
     height:100vh;overflow-y:scroll;
 }
+/*隐藏滚动条*/
+.songlist::-webkit-scrollbar{display: none}
 .songlist > li{
     border-bottom: 1px solid #ddd;
     padding: 10px 18px;
@@ -70,7 +72,7 @@ body{
     text-align: center;
     padding: 20px ;
     border-radius: 8px;
-    border: 2px dashed deeppink;
+    border: 2px dashed white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,8 +80,10 @@ body{
     flex-direction: column;
 
 }
+
 #clickable{
     cursor: pointer;
+    background-color: white;
 }
 
 .form{
