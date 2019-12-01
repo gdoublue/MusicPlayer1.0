@@ -21,8 +21,15 @@
             </div>
             <div class="row">
                 <label>
-                    外链  </label>
+                    歌曲外链  </label>
                     <input type="text" name="url" value="__url__">
+
+
+            </div>
+            <div class="row">
+                <label>
+                    封面外链  </label>
+                    <input type="text" name="coverUrl" value="__coverUrl__">
 
 
             </div>
@@ -34,12 +41,22 @@
         
         `,
         render(data={}) {
-            let placeholder = ['song', 'url', 'singer','id']
+            let placeholder = ['song', 'url', 'singer','id','coverUrl']
             let html = this.template
             placeholder.map((string) => {
                 html = html.replace(`__${string}__`, data[string] || '')
             })
             $(this.el).html(html)
+            console.log(data)
+            if(data.coverUrl){
+                $('#cover-clickable').removeClass('active')
+                $('#cover-draggable').css("background-image",`url(${data.coverUrl})`)
+            }
+            else{
+                $('#cover-clickable').addClass('active')
+                $('#cover-draggable').css("background-image",`url( )`)
+            }
+
             if(data.id){
                 $(this.el).prepend('<h1>编辑歌曲</h1>')
             }else{
@@ -53,7 +70,7 @@
     }
 
     let model={
-        data:{song:'',singer:'',url:'',id:''},
+        data:{song:'',singer:'',url:'',id:'',coverUrl:''},
         create(data){
             var song = AV.Object.extend('Song');
             let Song = new song();
@@ -61,6 +78,7 @@
                 song:data.name,
                 singer:data.singer,
                 url:data.url,
+                coverUrl:data.coverUrl,
             });
            return  Song.save().then((newSong) =>{
                 let {id, attributes} = newSong
@@ -74,6 +92,7 @@
                 song:data.name,
                 singer:data.singer,
                 url:data.url,
+               coverUrl:data.coverUrl,
             });
             return song.save().then((response)=>{
                 let {id, attributes} = response
@@ -107,11 +126,15 @@
                 }
                this.view.render(this.model.data)
             })
+            window.eventHub.on('newCover',(data)=>{
+                Object.assign(this.model.data,data)
+                this.view.render(this.model.data)
+            })
         },
         bindEvents(){
             $(this.view.el).on('submit','form',(e)=>{
                 e.preventDefault()
-                let needs= 'name singer url'.split(' ')
+                let needs= 'name singer url coverUrl'.split(' ')
                 let data = {}
                 needs.map((string)=>{
                     data[string] = $(this.view.el).find(`[name="${string}"]`).val()

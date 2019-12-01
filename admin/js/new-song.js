@@ -10,11 +10,13 @@
         active(){
             $(this.el).addClass('active')
             $('.uploadArea').addClass('active')
+            $('.coverArea').addClass('active')
             window.eventHub.emit('new')
         },
         deactive(){
             $(this.el).removeClass('active')
             $('.uploadArea').removeClass('active')
+            $('.coverArea').removeClass('active')
         }
     }
     let model={}

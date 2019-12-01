@@ -8,7 +8,7 @@
             document.title=data.song
            $('.song-description> h1').html(data.song)
             $(this.el).find('audio').attr('src',data.url)
-
+           return data
 
         },
         play(){
@@ -42,11 +42,10 @@
             this.model=model
             let id = this.getSongId()
             this.model.get(id).then(()=>{
-                console.log(this.model.data)
                 this.view.render(this.model.data)
+            }).then(()=>{
+                this.view.play()
             })
-            console.log('1')
-            setTimeout(()=>{this.view.play()},1300)
             this.bindEvents()
 
         },
@@ -55,10 +54,10 @@
              this.model.status =! this.model.status
               if (this.model.status){
                     this.view.pause()
-                  console.log(this.model.status)
+
               }else{
                 this.view.play()
-                  console.log(this.model.status)
+
               }
           })
 
