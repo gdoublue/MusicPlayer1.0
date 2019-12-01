@@ -6,8 +6,14 @@
         `,
         render(data){
             document.title=data.song
-           $('.song-description> h1').html(data.song)
+            $(this.el).find('.bgp').css('background-image',`url('${data.coverUrl}')`)
+            $(this.el).find('.cover').attr('src',data.coverUrl)
+           $('.song-description> h1').html(data.song+' - '+data.singer)
             $(this.el).find('audio').attr('src',data.url)
+                .on('ended',()=>{
+                    this.pause() //播完就暂停
+                })
+           console.log(data)
            return data
 
         },
