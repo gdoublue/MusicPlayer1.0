@@ -27,21 +27,22 @@
 
             </div>
             <div class="row">
-                <label>
-                    封面外链  </label>
-                    <input type="text" name="coverUrl" value="__coverUrl__">
-
-
+                <label>封面外链</label>
+                <input type="text" name="coverUrl" value="__coverUrl__">
+            </div>
+             <div class="row">
+                <label>歌词</label>
+                <textarea name="lyric" cols="50" rows="30">__lyric__</textarea>
             </div>
             <div class="row actions">
-                <button type="submit">保存</button>
+                <button type="submit">保*存</button> <button type="reset">删除</button>
             </div>
 
         </form>
         
         `,
         render(data={}) {
-            let placeholder = ['song', 'url', 'singer','id','coverUrl']
+            let placeholder = ['song', 'url', 'singer','id','coverUrl','lyric']
             let html = this.template
             placeholder.map((string) => {
                 html = html.replace(`__${string}__`, data[string] || '')
@@ -70,7 +71,7 @@
     }
 
     let model={
-        data:{song:'',singer:'',url:'',id:'',coverUrl:''},
+        data:{song:'',singer:'',url:'',id:'',coverUrl:'',lyric:''},
         create(data){
             var song = AV.Object.extend('Song');
             let Song = new song();
@@ -79,6 +80,7 @@
                 singer:data.singer,
                 url:data.url,
                 coverUrl:data.coverUrl,
+                lyric:data.lyric,
             });
            return  Song.save().then((newSong) =>{
                 let {id, attributes} = newSong
@@ -93,6 +95,7 @@
                 singer:data.singer,
                 url:data.url,
                coverUrl:data.coverUrl,
+               lyric:data.lyric,
             });
             return song.save().then((response)=>{
                 let {id, attributes} = response
@@ -134,7 +137,7 @@
         bindEvents(){
             $(this.view.el).on('submit','form',(e)=>{
                 e.preventDefault()
-                let needs= 'name singer url coverUrl'.split(' ')
+                let needs= 'name singer url coverUrl lyric'.split(' ')
                 let data = {}
                 needs.map((string)=>{
                     data[string] = $(this.view.el).find(`[name="${string}"]`).val()
@@ -145,7 +148,9 @@
                    this.create(data)
                }
             })
+
         },
+
         create(data){
             this.model.create(data)  //执行保存到leancloud
                 .then(()=>{
@@ -161,6 +166,7 @@
               this.model.update(data)
                   .then(()=>{
                       console.log('更新成功')
+                      console.log(data)
                       window.eventHub.emit('update',JSON.parse(JSON.stringify(this.model.data)))
                   })
         }

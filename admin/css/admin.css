@@ -64,6 +64,9 @@ body{
     width: 300px;
     height: 100px;
     padding-left: 20px;
+    position: absolute;
+    right: 100px;
+    top:400px
 
 }
 .uploadArea.active{
@@ -75,8 +78,8 @@ body{
     height: 300px;
     padding-left: 20px;
     position: absolute;
-    left:360px;
-    top: 20px;
+    right: 100px;
+    top: 50px;
 
 }
 

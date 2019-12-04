@@ -1,0 +1,252 @@
+.m-tabarea .m-tabct, .m-tabarea .m-tabct .tabctitem {
+    width: 100%;
+    height: 100%;
+}
+
+.m-tabarea .m-tabct {
+    display: block;
+}
+.m-hmhot{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.m-hmhot .hotop {
+        background-image: url(//s3.music.126.net/mobile-new/img/hot_music_bg_3x.jpg?2bfefd3…=);
+}
+.m-hmhot .hotop {
+    position: relative;
+    padding-top: 38.9%;
+    overflow: hidden;
+    background: url(//s3.music.126.net/mobile-new/img/hot_music_bg_2x.jpg?f01a252…=) no-repeat;
+    background-size: contain;
+}
+.m-hmhot .hotopct {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+.m-hmhot .hoticon {
+    width: 142px;
+    height: 67px;
+    background-position: -24px -30px;
+}
+.u-hmsprt {
+    background: url(//s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28…=) no-repeat;
+    background-size: 166px 97px;
+}
+.m-hmhot .hottime{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    -webkit-box-direction: normal;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    margin-top: 10px;
+    color: hsla(0,0%,100%,.8);
+    font-size: 12px;
+    transform: scale(.91);
+    transform-origin: left top;
+}
+.m-hmhot .hotop:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: rgba(0,0,0,.2);
+}
+
+.hotcont{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    position: relative;
+}
+
+/*a, a:visited {*/
+/*    color: #333;*/
+/*}*/
+/*a, button {*/
+/*    cursor: pointer;*/
+/*}*/
+/*.m-sgitem {*/
+/*    padding-left: 10px;*/
+/*}*/
+/*a, del, ins, s, u {*/
+/*    text-decoration: none;*/
+/*}*/
+.m-tabct{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.tabctitem{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    width: 100%;
+    height: 100%;
+}
+.m-hmsrch{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    background: #fbfcfd;
+}
+.m-input .f-bd .f-bd-btm{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    color: #333;
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    position: relative;
+    padding: 15px 10px;
+}
+.inputcover{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    color: #333;
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    position: relative;
+    width: 100%;
+    height: 30px;
+    padding: 0 30px;
+    box-sizing: border-box;
+    background: #ebecec;
+    border-radius: 30px;
+}
+.u-svg.u-svg-srch{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    color: #333;
+    font-style: normal;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    display: inline-block;
+    background-position: 0 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 13px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNiAyNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjYzljOWNhIiBkPSJNMjUuMTgxIDIzLjUzNWwtMS40MTQgMS40MTQtNy4zMTUtNy4zMTRBOS45NjYgOS45NjYgMCAwIDEgMTAgMjBDNC40NzcgMjAgMCAxNS41MjMgMCAxMFM0LjQ3NyAwIDEwIDBzMTAgNC40NzcgMTAgMTBjMCAyLjM0Mi0uODExIDQuNDktMi4xNiA2LjE5NWw3LjM0MSA3LjM0ek0xMCAyYTggOCAwIDEgMCAwIDE2IDggOCAwIDAgMCAwLTE2eiIvPjwvc3ZnPg==);
+    position: absolute;
+    left: 0;
+    top: 9px;
+    margin: 0 8px;
+    vertical-align: middle;
+}
+.inputcover > .input{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    margin: 0;
+    padding: 0;
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    -webkit-appearance: none;
+    border-radius: 0;
+    border: 0;
+    outline: none;
+    width: 100%;
+    height: 30px;
+    line-height: 18px;
+    background: transparent;
+    color: #333;
+}
+.holder{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    cursor: default;
+    position: absolute;
+    left: 30px;
+    top: 5px;
+    color: #c9c9c9;
+    background: transparent;
+    pointer-events: none;
+}
+.m-input .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    text-align: center;
+
+}
+
+.m-hotlist{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    color: #333;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    display: block;
+    padding: 15px 10px ;
+}
+.m-hotlist>.title{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-size: 12px;
+    line-height: 12px;
+    color: #666;
+}
+.m-hotlist>.list{
+    font: 14px/1.5 Helvetica,sans-serif,STHeiTi;
+    color: #333;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    margin: 10px  7px;
+}
+.m-hotlist >.item {
+    display: inline-block;
+    height: 32px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    padding: 0 14px;
+    font-size: 14px;
+    line-height: 32px;
+    color: #333;
+    position: relative;
+}
+.m-input {
+    padding: 15px 10px;
+}
+.m-hotlist .item:after {
+    border-radius: 60px;
+}
+
+.item>a{
+    border: 1px solid ;
+    border-color: #d3d4da;
+    padding: 10px;
+    margin: 10px 15px;
+    pointer-events: none;
+    box-sizing: border-box;
+    border-radius:60px;
+}
