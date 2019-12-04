@@ -35,7 +35,7 @@
                 <textarea name="lyric" cols="50" rows="30">__lyric__</textarea>
             </div>
             <div class="row actions">
-                <button type="submit">保*存</button> <button type="reset">删除</button>
+                <button type="submit">保*存</button> <button type="button" class="deleteSong">删除</button>
             </div>
 
         </form>
@@ -48,7 +48,6 @@
                 html = html.replace(`__${string}__`, data[string] || '')
             })
             $(this.el).html(html)
-            console.log(data)
             if(data.coverUrl){
                 $('#cover-clickable').removeClass('active')
                 $('#cover-draggable').css("background-image",`url(${data.coverUrl})`)
@@ -102,7 +101,12 @@
                 Object.assign(this.data,{id,...attributes})
                 return response
             },(error)=>{console.error(error)})
+        },
+        deleteSong(dataId){
+            var todo = AV.Object.createWithoutData('Song', dataId);
+           return  todo.destroy().then(this.data={})
         }
+
 
     }
 
@@ -148,7 +152,20 @@
                    this.create(data)
                }
             })
+            $(this.view.el).on('click','.deleteSong',(e)=>{
+                e.preventDefault()
+                if(this.model.data.id){
+                    if(confirm("你确定要删除该歌曲吗？")){
+                       this.model.deleteSong(this.model.data.id).then(()=>{
+                           window.eventHub.emit('delete')
+                           alert('删除成功')
+                           this.view.reset()
 
+                       })
+                    }
+                }
+
+            })
         },
 
         create(data){

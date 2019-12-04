@@ -91,6 +91,11 @@
                 // console.log('更新列表')
                 // console.log(this.model.data)
             })
+            window.eventHub.on('delete',()=>{
+                this.model.find().then(()=>{
+                    this.view.render(this.model.data)
+                })
+            })
 
         }
     }

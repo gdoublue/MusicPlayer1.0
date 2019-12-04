@@ -22,7 +22,10 @@
                     .siblings().removeClass('active')
                 window.eventHub.emit('selectTab',tabName)
             })
-
+            $('.topbton').on('click',(e)=>{
+                e.preventDefault()
+               window.open('https://music.163.com/api/android/download/deeplink?resourceType=playlist&resourceValue=19723756')
+            })
         }
 
     }
